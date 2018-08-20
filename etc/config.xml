@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <promopage>
+            <general>
+                <enable>1</enable>
+                <display_promo_title>Promo page</display_promo_title>
+            </general>
+            <products_list>
+                <display_page_number>1</display_page_number>
+            </products_list>
+        </promopage>
+    </default>
+</config>

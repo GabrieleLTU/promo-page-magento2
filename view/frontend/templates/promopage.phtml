@@ -1,0 +1,157 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+use Magento\Framework\App\Action\Action;
+
+//style="background:white; box-shadow: 10px 10px 5px #aaaaaa;"
+?>
+<style>
+    .promo-image {
+        /*height: auto;*/
+        /*width: 60%;*/
+        height: 300px;
+        width: auto;
+    }
+    .container {
+        position: relative;
+        font-family: Arial;
+    }
+
+    .text-block {
+        position: absolute;
+        bottom: 20%;
+        height: 30%;
+        width: 30%;
+        right: 5%;
+        background-color: #e2e2e27a;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        min-width: fit-content;
+        min-height: fit-content;
+    }
+    .promo-block {
+        text-align: center;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-row-gap: 20px;
+    }
+
+</style>
+
+<div>
+    <h1 style="text-align: center;"><?php echo $block->getCmsPageContentHeading('promo-page'); ?></h1>
+    <div class="promo-block">
+        <?php
+        $productCollection = $block->getProductCollection();
+        $helper = $this->helper('Magento\Catalog\Helper\Output');
+        foreach ($productCollection as $product) { ?>
+            <div class="container">
+                <a href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>">
+                    <img class="promo-image" src="<?php echo $block->getUrl().'pub/media/catalog/product' . $product->getImage(); ?>" alt="<?php echo $product->getName();?>"/>
+                </a>
+                <div class="text-block">
+                    <h4 style="font-size: x-large;"><a
+                           href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>">
+                            <?php /* @escapeNotVerified */ echo $helper->productAttribute($product, $product->getName(), 'name'); ?>
+                        </a></h4>
+<!--                    <p>--><?php //echo $product->getPrice(); ?><!--</p>-->
+<!--                    --><?php ///* @escapeNotVerified */
+//                        $productNameStripped = $block->stripTags($product->getName(), null, true);
+//                        echo $helper->productAttribute($product, $product->getShortDescription(), 'short_description') ?>
+                    <?php $abstractProductBlock = $block->getLayout()->createBlock('\Magento\Catalog\Block\Product\AbstractProduct');
+                    echo $abstractProductBlock->getProductPrice($product);?>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+    <p style="text-align: center;"><?php echo $block->getCmsPageContent('promo-page'); ?></p>
+
+<!--    <div class="products wrapper grid products-grid" style="text-align: center;">-->
+<!--<!--        <ol class="products list items product-items">-->
+<!---->
+<!--            --><?php
+//            $productCollection = $block->getProductCollection();
+//            $_helper = $this->helper('Magento\Catalog\Helper\Output');
+//            $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+//            $viewMode = 'grid';
+//            $pos = $block->getPositioned();
+//            foreach ($productCollection as $product) {?>
+<!--                <div class="item product product-item">-->
+<!---->
+<!--                    <div class="product-item-info" data-container="product-grid">-->
+<!--                    <a href="--><?php ///* @escapeNotVerified */ echo $product->getProductUrl(); ?><!--" class="product photo product-item-photo" tabindex="-1">-->
+<!---->
+<!--                            <span class="product-image-container" style="width:100%;">-->
+<!--                                <span class="product-image-wrapper" style="padding-bottom: 125%;">-->
+<!--                                    <img class="promo-image" src="--><?php //echo $block->getUrl().'pub/media/catalog/product' . $product->getImage(); ?><!--" alt="--><?php //echo $product->getName();?><!--">-->
+<!--                                </span>-->
+<!--                            </span>-->
+<!--                        </a>-->
+<!--                        <div class="product details product-item-details">-->
+<!--                            --><?php
+//                            $productNameStripped = $block->stripTags($product->getName(), null, true);
+//                            ?>
+<!--                            <strong class="product name product-item-name">-->
+<!--                                <a class="product-item-link"-->
+<!--                                   href="--><?php ///* @escapeNotVerified */ echo $product->getProductUrl() ?><!--">-->
+<!--                                    --><?php ///* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getName(), 'name'); ?>
+<!--                                </a>-->
+<!--                            </strong>-->
+<!--                            --><?php //echo $block->getReviewsSummaryHtml($product, $templateType); ?>
+<!--                            --><?php ///* @escapeNotVerified */ echo $block->getProductPrice($product) ?>
+<!--                            --><?php //echo $block->getProductDetailsHtml($product); ?>
+<!---->
+<!--                            <div class="product description product-item-description" style="margin: 0 0">-->
+<!--                                --><?php ///* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getShortDescription(), 'short_description') ?>
+<!--                                <a href="--><?php ///* @escapeNotVerified */ echo $product->getProductUrl() ?><!--" title="--><?php ///* @escapeNotVerified */ echo $productNameStripped ?><!--"-->
+<!--                                   class="action more">--><?php ///* @escapeNotVerified */ echo __('Learn More') ?><!--</a>-->
+<!--                            </div>-->
+<!---->
+<!--                        </div>-->
+<!--                        <div class="product actions product-item-actions"--><?php //echo strpos($pos, $viewMode . '-actions') ? $position : ''; ?><!-->
+<!--                            <div data-role="add-to-links" class="actions-secondary"--><?php //echo strpos($pos, $viewMode . '-secondary') ? $position : ''; ?><!-->
+<!--                                --><?php //if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow()): ?>
+<!--                                    <a href="#"-->
+<!--                                       class="action towishlist"-->
+<!--                                       title="--><?php //echo $block->escapeHtml(__('Add to Wish List')); ?><!--"-->
+<!--                                       aria-label="--><?php //echo $block->escapeHtml(__('Add to Wish List')); ?><!--"-->
+<!--                                       data-post='--><?php ///* @escapeNotVerified */ echo $block->getAddToWishlistParams($product); ?><!--'-->
+<!--                                       data-action="add-to-wishlist"-->
+<!--                                       role="button">-->
+<!--                                        <span>--><?php ///* @escapeNotVerified */ echo __('Add to Wish List') ?><!--</span>-->
+<!--                                    </a>-->
+<!--                                --><?php //endif; ?>
+<!--                                --><?php
+//                                $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+//                                ?>
+<!--                                <a href="#"-->
+<!--                                   class="action tocompare"-->
+<!--                                   title="--><?php //echo $block->escapeHtml(__('Add to Compare')); ?><!--"-->
+<!--                                   aria-label="--><?php //echo $block->escapeHtml(__('Add to Compare')); ?><!--"-->
+<!--                                   data-post='--><?php ///* @escapeNotVerified */ echo $compareHelper->getPostDataParams($product); ?><!--'-->
+<!--                                   role="button">-->
+<!--                                    <span>--><?php ///* @escapeNotVerified */ echo __('Add to Compare') ?><!--</span>-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!---->
+<!---->
+<!---->
+<!--                </div>-->
+<!---->
+<!--                <!--    echo $product->getName();-->
+<!--                <!--    echo '<img src="--><?php ////echo $product->getImage() ?><!--<!--" alt="Smiley face" height="42" width="42">';-->
+<!--                <!--    print_r($product->getData());-->
+<!--                <!--echo "<br>";-->
+<!--            --><?php //}
+//            ?>
+<!---->
+<!--<!--        </ol>-->
+<!--    </div>-->
+</div>
+
+

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="visma" translate="label" sortOrder="10">
+            <label>Visma</label>
+        </tab>
+        <section id="promopage" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Promo page</label>
+            <tab>visma</tab>
+            <resource>Visma_PromoPage::promopage_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group  id="products_list" translate="label" sortOrder="130"
+                    showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Display configuration</label>
+                <field id="display_page_number" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Number of products per page</label>
+                    <source_model>Visma\PromoPage\Model\Config\Source\DisplayNumberPerPage</source_model>
+                </field>
+                <comment>
+                    Promo page title (heading) and additional text (content) can be added in page settings ("Promo page").
+                    The title is displayed above the products. The additional text displayed below the products.
+                </comment>
+            </group>
+        </section>
+    </system>
+</config>
